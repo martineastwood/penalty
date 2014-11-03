@@ -5,10 +5,10 @@ library(jsonlite)
 library(plyr)
 
 # scrape the data
-df <- ldply(1:521, function(x){
+df <- ldply(1:612, function(x){
   # Scrape responsibly kids, we don't want to ddos
   # the Fantasy Premier League's website
-  Sys.sleep(0.10)
+  Sys.sleep(0.05)
   print(sprintf('Scraping player %s', x))
   url <- sprintf("http://fantasy.premierleague.com/web/api/elements/%s/?format=json", x)
   json <- fromJSON(getURL(url))
@@ -17,7 +17,7 @@ df <- ldply(1:521, function(x){
                                      'now_cost', 'total_points')])
 })
 # Tidy it up as Evra still in there
-df <- subset(df, !web_name %in% c('Evra'))
+#df <- subset(df, !web_name %in% c('Evra'))
 
 # The vector to optimize on
 objective <- df$total_points
@@ -27,7 +27,7 @@ num_gk <- 2
 num_def <- 5
 num_mid <- 5
 num_fwd <- 3
-max_cost <- 100
+max_cost <- 100.7
 
 # Create vectors to constrain by position
 df$Goalkeeper <- ifelse(df$type_name == "Goalkeeper", 1, 0)
@@ -57,3 +57,4 @@ print(arrange(df[which(x$solution==1),], desc(Goalkeeper), desc(Defender),
               desc(Midfielder), desc(Forward), desc(total_points)))
 print(str_c('Total Price: ', sum(df[which(x$solution==1), 'now_cost'])))
 print(str_c('Total Points: ', sum(df[which(x$solution==1), 'total_points'])))
+
