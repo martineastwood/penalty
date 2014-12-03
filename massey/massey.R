@@ -1,12 +1,3 @@
-library(RMySQL)
-
-con <- dbConnect(MySQL(),
-                 user = 'xxxxxxx',
-                 password = 'xxxxxxxx',
-                 host = 'xxxxxxxx',
-                 dbname='xxxxxxxx')
-df <- dbGetQuery(con, "select * from massey_example")
-
 num_teams <- length(unique(c(df$team1, df$team2)))
 num_games <- nrow(df)
 teams <- unique(c(df$team1, df$team2))
