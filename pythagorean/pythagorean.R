@@ -1,7 +1,7 @@
 library(XML)
 library(ggplot2)
 
-source('~/Dropbox/martin/football/pythagorean/pythagorean_theme.R')
+source('xxxxxxxxxx')
   
   competition='English Premier League'
   url='http://www.statto.com/football/stats/england/premier-league/2014-2015/table'
