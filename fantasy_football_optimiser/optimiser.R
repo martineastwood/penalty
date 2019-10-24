@@ -4,7 +4,7 @@ library(stringr)
 library(jsonlite)
 library(dplyr)
 
-df <- "https://fantasy.premierleague.com/drf/bootstrap-static" %>% 
+df <- "https://fantasy.premierleague.com/api/bootstrap-static/" %>% 
   getURL %>% 
   fromJSON %>% 
   .$elements %>% 
